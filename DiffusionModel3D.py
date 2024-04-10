@@ -5,7 +5,7 @@ class DiffusionModel3D():
 
     def __init__(self, prompt):
         self.prompt = prompt
-        self.generateTriangleMesg(self.prompt)
+        self.generateTriangleMesh(self.prompt)
 
     def generateTriangleMesh(self):
         pipe = ShapEPipeline.from_pretrained("openai/shap-e").to("cuda")
