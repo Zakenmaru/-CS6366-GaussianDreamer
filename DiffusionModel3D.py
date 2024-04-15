@@ -21,7 +21,7 @@ class DiffusionModel3D():
             frame_size=256,
             output_type="mesh"
         ).images
-        self.mesh = self.convertMesh(mesh_list[0])
+        self.convertMesh(mesh_list[0])
 
     def convertMesh(self, mesh):
         self.mesh = TriangleMesh()
@@ -34,7 +34,7 @@ class DiffusionModel3D():
     def getColors(self, color_dict):
         colors = []
         for i in range(len(color_dict['R'])):
-            color_arr = np.array([color_dict['R'][i], color_dict['G'][i], color_dict['B'][i]])
+            color_arr = np.array([color_dict['R'][i].cpu(), color_dict['G'][i].cpu(), color_dict['B'][i]].cpu())
             colors.append(color_arr)
 
         return torch.tensor(colors)
