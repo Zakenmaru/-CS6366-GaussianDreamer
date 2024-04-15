@@ -34,7 +34,7 @@ class DiffusionModel3D():
     def getColors(self, color_dict):
         colors = []
         for i in range(len(color_dict['R'])):
-            color_arr = np.array([color_dict['R'][i].cpu(), color_dict['G'][i].cpu(), color_dict['B'][i]].cpu())
+            color_arr = np.array([color_dict['R'].cpu()[i], color_dict['G'].cpu()[i], color_dict['B'].cpu()[i]])
             colors.append(color_arr)
 
         return torch.tensor(colors)
