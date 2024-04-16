@@ -42,6 +42,10 @@ class DiffusionModel3D():
             self.mesh.colors.append([self.colors[v1_ind], self.colors[v2_ind], self.colors[v3_ind]])
             self.mesh.normals.append([self.normals[v1_ind], self.normals[v2_ind], self.normals[v3_ind]])
 
+        self.mesh.vertices = np.array(self.mesh.vertices)
+        self.mesh.colors = np.array(self.mesh.colors)
+        self.mesh.normals = np.array(self.mesh.normals)
+
     def getColors(self, color_dict):
         colors = []
         for i in range(len(color_dict['R'])):
