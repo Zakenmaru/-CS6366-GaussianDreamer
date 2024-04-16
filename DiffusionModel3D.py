@@ -100,7 +100,7 @@ class DiffusionModel3D():
                                       + ((1 - u - v) * self.mesh.colors[:, 2, :])).astype(np.float32)
 
         mesh_normal_sum = self.mesh.normals[:,0,:] + self.mesh.normals[:,1,:] + self.mesh.normals[:,2,:]
-        self.point_clouds.normals = mesh_normal_sum / np.linalg.norm(mesh_normal_sum, axis=1).as_type(np.float32)
+        self.point_clouds.normals = mesh_normal_sum / np.linalg.norm(mesh_normal_sum, axis=1).astype(np.float32)
 
 
     def calcTriangleAreas(self, v1_arr, v2_arr, v3_arr):
