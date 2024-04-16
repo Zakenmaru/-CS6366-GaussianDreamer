@@ -9,13 +9,13 @@ if __name__ == "__main__":
     diffusion_model_3d.generateTriangleMesh()
     triangle_mesh = diffusion_model_3d.mesh
 
-    print(triangle_mesh.vertices.shape)
-    print(triangle_mesh.normals.shape)
-    print(triangle_mesh.colors.shape)
+    print(len(triangle_mesh.vertices))
+    print(len(triangle_mesh.normals))
+    print(len(triangle_mesh.colors))
 
     diffusion_model_3d.generatePointclouds()
     point_clouds = diffusion_model_3d.point_clouds
 
-    print(point_clouds.vertices.shape)
-    print(point_clouds.normals.shape)
-    print(point_clouds.colors.shape)
+    print(len(point_clouds.vertices))
+    print(len(point_clouds.normals))
+    print(len(point_clouds.colors))
