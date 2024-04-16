@@ -1,6 +1,4 @@
-import numpy as np
-
-class TriangleMesh:
+class PointClouds:
 
     def __init__(self):
         self.vertices = []
