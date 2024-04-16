@@ -29,7 +29,7 @@ class DiffusionModel3D():
         self.convertMesh(mesh_list[0])
 
     def convertMesh(self, mesh):
-        self.vertices = mesh.verts
+        self.vertices = mesh.verts.cpu()
         self.faces = mesh.faces
         self.colors = self.getColors(mesh.vertex_channels)
         self.getNormals()
