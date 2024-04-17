@@ -45,8 +45,8 @@ class GaussianInitialization:
             norm_dist = dist / max_dist
 
             if abs(norm_dist) < 0.01:
-                p_r.append(np.array(p_u))
-                c_r.append(np.array([self.c_m[i] + 0.2 * np.random.random(size=3)]))
+                p_r.append(p_u)
+                c_r.append(list(np.array(self.c_m[i]) + 0.2 * np.random.random(size=3)))
 
         p_r = np.array(p_r)
         c_r = np.array(c_r)
