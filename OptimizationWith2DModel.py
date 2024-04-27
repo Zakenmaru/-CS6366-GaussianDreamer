@@ -158,7 +158,7 @@ class OptimizationWith2DModel:
 
         self.ground_truth_training_images = []
         self.ground_truth_losses = []
-        for iter in range(4000):
+        for iter in range(6000):
             adam_optimizer.zero_grad()
             gaussians_pos_2d, depths, radii, conics, compensation, num_tiles_hit, cov_3d = project_gaussians(
                 self.positions,
@@ -195,7 +195,7 @@ class OptimizationWith2DModel:
                 img = transform(rendered_image)
                 self.ground_truth_training_images.append(img)
 
-                print("Iteration: {0}/4000   ---   Loss: {1}".format(iter, loss))
+                print("Iteration: {0}/6000   ---   Loss: {1}".format(iter, loss))
 
             self.ground_truth_losses.append(loss)
 
