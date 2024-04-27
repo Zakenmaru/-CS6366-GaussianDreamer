@@ -1,10 +1,10 @@
+import math
 import numpy as np
 from scipy.spatial.distance import cdist
 
-from KDTree import KDTree
-from BoundingBox import BoundingBox
-from Gaussians import Gaussians
 
+# Initializes the 3D Gaussians from the point clouds after noisy point growing
+# and color perturbation
 class GaussianInitialization:
     def __init__(self, p_m, c_m):
         self.p_m = p_m
@@ -12,22 +12,36 @@ class GaussianInitialization:
         self.p_f = None
         self.c_f = None
 
+    # Initialized Gaussians with the point clouds positions as centers
+    # Colors of point clouds represented with spherical harmonics (degree=0)
+    # Opacities of point clouds initialized to 0.1
+    # Scale matrix obtained as log transformed avg distance of closest 3 points
+    # Rotation matrix represented as quaternions with 1st value set to 1 and rest as 0
     def initializeGaussians(self):
         self.noisyPointGrowing()
 
-        # get distance between nearest two positions
-        distances = cdist(self.p_f, self.c_f)
-        np.fill_diagonal(distances, np.inf)
-
-        # distance between nearest two positions
-        D = np.min(distances[np.nonzero(distances)])
-
-        # covariance and opacity of 3D Gaussians
-        sigma_b = np.full((len(self.p_f), 1), D)
+        # opacity of 3D Gaussians
         alpha_b = np.full((len(self.p_f), 1), 0.1)
 
-        return Gaussians(self.p_f, self.c_f, sigma_b, alpha_b)
+        # covariance matrix represented as scales and rotations
 
+        # get 4 closest points (as their distances)
+        distances = cdist(self.p_f, self.p_f)
+        np.fill_diagonal(distances, np.inf)
+        print(distances)
+        closest_distances = np.partition(distances, 4)[:, :4]
+        print(closest_distances)
+        mean_distances = np.mean(closest_distances[:, 1:] ** 2, axis=1)
+        print(mean_distances)
+
+        scales = np.repeat(np.log(np.sqrt(mean_distances))[..., None], 3, axis=1)
+
+        rotations = np.zeros((len(self.p_f), 4))
+        rotations[:, 0] = 1
+
+        return Gaussians(self.p_f, self.c_f, alpha_b, scales, rotations)
+
+    # Algorithm to perform noisy point growing and color perturbation
     def noisyPointGrowing(self):
         K_m = KDTree(self.p_m, dim=3)
 
@@ -46,7 +60,13 @@ class GaussianInitialization:
 
             if abs(norm_dist) < 0.01:
                 p_r.append(p_u)
-                c_r.append(list(np.array(self.c_m[i]) + 0.2 * np.random.random(size=3)))
+                # Color perturbation
+                pertrubed_color = np.array(self.c_m[i]) + 0.2 * np.random.random(size=3)
+
+                # Represent color using spherical harmonics with degree=0
+                # sh_coefficient = 0.5 * math.sqrt(1 / math.pi)
+                # color = np.divide(np.subtract(pertrubed_color, 0.5), sh_coefficient)
+                c_r.append(pertrubed_color)
 
         p_r = np.array(p_r)
         c_r = np.array(c_r)

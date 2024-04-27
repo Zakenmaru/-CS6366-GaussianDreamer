@@ -1,3 +1,4 @@
+# AABB BoundingBox for 3d object
 class BoundingBox:
     def __init__(self, points):
         self.dim = len(points[0])

@@ -1,2 +1,4 @@
 diffusers
 accelerate
+gsplat
+Ninja
