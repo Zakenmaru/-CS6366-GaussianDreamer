@@ -7,7 +7,7 @@ from OptimizationWith2DModel import OptimizationWith2DModel
 if __name__ == "__main__":
 
     prompt = sys.argv[1]
-    sample_proportion = sys.argv[2]
+    sample_proportion = float(sys.argv[2])
 
     diffusion_model_3d = DiffusionModel3D(prompt)
     diffusion_model_3d.generateTriangleMesh()
