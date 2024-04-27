@@ -35,7 +35,7 @@ class OptimizationWith2DModel:
         self.glob_scale = float(1.0)
         self.viewmat = torch.tensor([[1.0, 0.0, 0.0, 0.0],
                                      [0.0, 1.0, 0.0, 0.0],
-                                     [0.0, 0.0, 1.0, 0.0],
+                                     [0.0, 0.0, 1.0, 2.0],
                                      [0.0, 0.0, 0.0, 1.0]], dtype=torch.float32, device='cuda')
         self.fx = 0.5 * 512.0 / math.tan(0.5 * (math.pi / 2.0))
         self.fy = 0.5 * 512.0 / math.tan(0.5 * (math.pi / 2.0))
