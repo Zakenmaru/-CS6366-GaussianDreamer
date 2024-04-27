@@ -129,7 +129,7 @@ class OptimizationWith2DModel:
             img = transform(rendered_image.squeeze())
             self.training_images.append(img)
 
-            print("Iteration: {0}/1000   ---   Loss: {1}".format(iter, sds_loss.item()))
+            print("Iteration: {0}/50   ---   Loss: {1}".format(iter, sds_loss.item()))
 
             self.losses.append(sds_loss)
 
