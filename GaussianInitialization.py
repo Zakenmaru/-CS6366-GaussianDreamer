@@ -2,6 +2,10 @@ import math
 import numpy as np
 from scipy.spatial.distance import cdist
 
+from Gaussians import Gaussians
+from KDTree import KDTree
+from BoundingBox import BoundingBox
+
 
 # Initializes the 3D Gaussians from the point clouds after noisy point growing
 # and color perturbation
@@ -61,12 +65,12 @@ class GaussianInitialization:
             if abs(norm_dist) < 0.01:
                 p_r.append(p_u)
                 # Color perturbation
-                pertrubed_color = np.array(self.c_m[i]) + 0.2 * np.random.random(size=3)
+                perturbed_color = np.array(self.c_m[i]) + 0.2 * np.random.random(size=3)
 
                 # Represent color using spherical harmonics with degree=0
                 # sh_coefficient = 0.5 * math.sqrt(1 / math.pi)
                 # color = np.divide(np.subtract(pertrubed_color, 0.5), sh_coefficient)
-                c_r.append(pertrubed_color)
+                c_r.append(perturbed_color)
 
         p_r = np.array(p_r)
         c_r = np.array(c_r)

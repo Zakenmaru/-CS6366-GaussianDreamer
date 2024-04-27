@@ -1,6 +1,5 @@
 import torch
 import math
-import numpy as np
 
 from gsplat import project_gaussians, rasterize_gaussians
 from torch import Tensor, optim
