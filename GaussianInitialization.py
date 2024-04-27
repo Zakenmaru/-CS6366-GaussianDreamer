@@ -25,18 +25,15 @@ class GaussianInitialization:
         self.noisyPointGrowing()
 
         # opacity of 3D Gaussians
-        alpha_b = np.full((len(self.p_f), 1), 0.1)
+        alpha_b = np.full((len(self.p_f), 1), 0.75)
 
         # covariance matrix represented as scales and rotations
 
         # get 4 closest points (as their distances)
         distances = cdist(self.p_f, self.p_f)
         np.fill_diagonal(distances, np.inf)
-        print(distances)
         closest_distances = np.partition(distances, 4)[:, :4]
-        print(closest_distances)
         mean_distances = np.mean(closest_distances[:, 1:] ** 2, axis=1)
-        print(mean_distances)
 
         scales = np.repeat(np.log(np.sqrt(mean_distances))[..., None], 3, axis=1)
 

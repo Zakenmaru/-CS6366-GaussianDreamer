@@ -23,7 +23,9 @@ if __name__ == "__main__":
     print("# of point clouds: {0}".format(point_clouds.vertices.shape[0]))
 
     diffusion_model_3d.visualizePointClouds()
+    print("Point clouds visualization saved to \"PointClouds.png\"")
     diffusion_model_3d.visualizePointCloudsViews()
+    print("Point clouds (from different camera angles) visualization saved to \"PointCloudsViews.png\"")
 
     gaussian_initialization = GaussianInitialization(point_clouds.vertices, point_clouds.colors)
     gaussians = gaussian_initialization.initializeGaussians()

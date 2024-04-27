@@ -108,7 +108,7 @@ class DiffusionModel3D():
                    self.point_clouds.vertices[:, 2],
                    c=self.point_clouds.colors,
                    s=1)
-        plt.show()
+        plt.savefig('PointClouds.png')
 
     def visualizePointCloudsViews(self):
         figure = plt.figure(figsize=(6, 9), tight_layout=True)
@@ -138,7 +138,7 @@ class DiffusionModel3D():
         self.configureSubplot(ax6, -90, 90, "-XY view")
 
         figure.subplots_adjust(wspace=0.05, hspace=0.05)
-        plt.show()
+        plt.savefig('PointCloudsViews.png')
 
     def configureSubplot(self, ax, elev, azim, title):
         ax.set_xlim((-1, 1))
