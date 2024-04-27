@@ -38,7 +38,11 @@ if __name__ == "__main__":
                                                  gaussians.scales,
                                                  gaussians.rotations,
                                                  gaussians.alphas)
-    print("Optimizing with 2d Diffusion Model")
-    diffusion_model_2d.train()
+    print("Applying perspective projection")
+    print("Obtaining ground truth image through 3D gaussian splatting")
+    diffusion_model_2d.train_ground_truth()
+    print("Ground truth training iteration images saved to \"ground_truth_training_iterations.gif\"")
 
-    print("Training iteration images saved to \"training_iterations.gif\"")
+    print("Optimizing with 2d diffusion model")
+    diffusion_model_2d.train()
+    print("Diffusion model training iteration images saved to \"diffusion_training_iterations.gif\"")

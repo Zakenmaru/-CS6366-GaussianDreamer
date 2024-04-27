@@ -30,12 +30,13 @@ class GaussianInitialization:
         # covariance matrix represented as scales and rotations
 
         # get 4 closest points (as their distances)
-        distances = cdist(self.p_f, self.p_f)
-        np.fill_diagonal(distances, np.inf)
-        closest_distances = np.partition(distances, 4)[:, :4]
-        mean_distances = np.mean(closest_distances[:, 1:] ** 2, axis=1)
+        # distances = cdist(self.p_f, self.p_f)
+        # np.fill_diagonal(distances, np.inf)
+        # closest_distances = np.partition(distances, 4)[:, :4]
+        # mean_distances = np.mean(closest_distances[:, 1:] ** 2, axis=1)
 
-        scales = np.repeat(np.log(np.sqrt(mean_distances))[..., None], 3, axis=1)
+        # scales = np.repeat(np.log(np.sqrt(mean_distances))[..., None], 3, axis=1)
+        scales = np.full((len(self.p_f), 3), 0.75)
 
         rotations = np.zeros((len(self.p_f), 4))
         rotations[:, 0] = 1
