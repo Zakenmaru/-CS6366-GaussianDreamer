@@ -157,7 +157,6 @@ class OptimizationWith2DModel:
                                      {'params': [self.opacities], 'lr': 0.01}])
 
         self.ground_truth_training_images = []
-        self.ground_truth_losses = []
         for iter in range(6000):
             adam_optimizer.zero_grad()
             gaussians_pos_2d, depths, radii, conics, compensation, num_tiles_hit, cov_3d = project_gaussians(
@@ -197,7 +196,6 @@ class OptimizationWith2DModel:
 
                 print("Iteration: {0}/6000   ---   Loss: {1}".format(iter, loss))
 
-            self.ground_truth_losses.append(loss)
 
         self.ground_truth_training_images[0].save("ground_truth_training_iterations.gif",
                                                   save_all=True,
@@ -216,7 +214,6 @@ class OptimizationWith2DModel:
                                      {'params': [self.opacities], 'lr': 0.01}])
 
         self.sds_training_images = []
-        self.sds_losses = []
         for iter in range(1000):
             adam_optimizer.zero_grad()
             gaussians_pos_2d, depths, radii, conics, compensation, num_tiles_hit, cov_3d = project_gaussians(
@@ -262,8 +259,6 @@ class OptimizationWith2DModel:
                 self.sds_training_images.append(img)
 
                 print("Iteration: {0}/1000   ---   Loss: {1}".format(iter, sds_loss))
-
-            self.sds_losses.append(sds_loss)
 
         self.sds_training_images[0].save("diffusion_training_iterations.gif",
                                          save_all=True,
