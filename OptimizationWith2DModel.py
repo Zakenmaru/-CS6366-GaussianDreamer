@@ -303,9 +303,6 @@ class OptimizationWith2DModel:
         with torch.no_grad():
             text_embeddings = text_encoder(tokens.input_ids.to('cuda'))[0]
 
-        del tokenizer
-        del text_encoder
-
         return text_embeddings
 
     def denoiser_forward(self, latents, t, text_embeddings):
